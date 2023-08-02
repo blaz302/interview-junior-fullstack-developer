@@ -14,7 +14,7 @@ export class CityService {
 
   private loadCitiesFromFile(): void {
     try {
-      const citiesJson = fs.readFileSync('../cities.json', 'utf8');
+      const citiesJson = fs.readFileSync('../cities.json', 'utf8'); //read from the file outside the interview-backend folder, not the one inside data folder
       this.cities = JSON.parse(citiesJson);
     } catch (err) {
       console.error('Error loading cities from file:', err);

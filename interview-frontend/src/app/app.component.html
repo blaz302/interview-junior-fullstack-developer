@@ -31,11 +31,11 @@
   </div>
 
 
-  <div *ngIf="dataLoaded && searchQuery != ''" class="white-background" style="width: 50%; display: flex; flex-direction: column; justify-content: center;">
+  <div *ngIf="dataLoaded && searchQuery != ''" class="white-background" style="width: 50%; display: flex; flex-direction: column; justify-content: center;" [@rowAnimation]="page">
     <div class="card-container">
 
       <ng-container *ngIf="dataLoaded && getTotalPages() > 0">
-        <table mat-table [dataSource]="dataSource" matSort [@fadeIn]>
+        <table mat-table [dataSource]="dataSource" matSort>
           <ng-container matColumnDef="index">
             <th mat-header-cell *matHeaderCellDef class="table-header">
               <div class="header-content">

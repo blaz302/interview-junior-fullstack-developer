@@ -10,11 +10,12 @@ import { MatTableDataSource } from '@angular/material/table';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
   animations: [
-    trigger('fadeIn', [
-      transition(':enter', [
-        style({ opacity: 0.1 }),
-        animate('1s', style({ opacity: 1 })),
-      ]),
+
+    trigger('rowAnimation', [
+      transition(':increment, :decrement, :enter', [ // Used to detect page changes
+        style({ opacity: 0, transform: 'translateY(-50px)' }),
+        animate('300ms ease-out', style({ opacity: 1, transform: 'translateY(0)' }))
+      ])
     ]),
   ],
 })
