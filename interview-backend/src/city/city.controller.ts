@@ -13,33 +13,8 @@ export class CityController {
         @Query('page') page: number,
         @Query('sort') sort: SortEnum,
     ): { cities: City[]; totalCount: number } {
-
-        const itemsPerPage = 5;
-        const startIndex = (page - 1) * itemsPerPage;
-        const endIndex = startIndex + itemsPerPage;
-        
-        const filteredCities: City[] = this.cityService
-        .getCities()
-        .filter(
-          (city) => city.cityName.toLowerCase().includes(query.toLowerCase())
-        );
+        const filteredCities: City[] = this.cityService.getCities(query, page, sort);
         const matchingCount: number = filteredCities.length;
-        
-        if(sort == SortEnum.citySortAsc){ //sort by city name
-            filteredCities.sort((a, b) => a.cityName.localeCompare(b.cityName));
-        }
-        else if(sort == SortEnum.citySortDesc){
-            filteredCities.sort((a, b) => b.cityName.localeCompare(a.cityName));
-        }
-        else if(sort == SortEnum.countSortAsc){
-            filteredCities.sort((a, b) => a.count - b.count);
-        }
-        else { //sort by count descending
-            filteredCities.sort((a, b) => b.count - a.count);
-        }
-        
-        const matchedCities: City[] = filteredCities.slice(startIndex, endIndex);
-
-        return { cities: matchedCities, totalCount: matchingCount };
+        return { cities: filteredCities, totalCount: matchingCount };
     }
 }
